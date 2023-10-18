@@ -1,0 +1,17 @@
+/* mainStyles.css */
+.main-container {
+    background-color: #f0f0f0;
+    padding: 20px;
+    /* Agrega otros estilos base según tus necesidades */
+  
+    /* Estilos para pantallas más pequeñas (ejemplo: tablets) */
+    @media (max-width: 768px) {
+      padding: 10px;
+    }
+  
+    /* Estilos para pantallas aún más pequeñas (ejemplo: smartphones) */
+    @media (max-width: 480px) {
+      padding: 5px;
+    }
+  }
+  
