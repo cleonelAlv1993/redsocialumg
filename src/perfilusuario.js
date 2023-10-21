@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom'; // Importa Link desde react-router-dom
 import './stylePerfil.css'; // Importa tus estilos CSS aquí
 
 function PerfilUsuario() {
@@ -9,7 +10,10 @@ function PerfilUsuario() {
           <img src="imagperf/11.jpg" alt="Foto de perfil" />
           <h1>Nombre de Usuario</h1>
           <p>Descripción del usuario</p>
-          <button>Editar perfil</button>
+          {/* Utiliza Link para redirigir a la página de edición de perfil */}
+          <Link to="/editar-perfil">
+            <button>Editar perfil</button>
+          </Link>
         </section>
         <section className="user-posts">
           <div className="post">

@@ -1,120 +1,37 @@
-:root {
-    --background-light: #f0f0f0; /* Color de fondo en modo claro */
-    --text-light: #333; /* Color de texto en modo claro */
-    --background-dark: #333; /* Color de fondo en modo oscuro */
-    --text-dark: #fff; /* Color de texto en modo oscuro */
-  }
-
-  body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: var(--background-light);
-    color: var(--text-light);
-    transition: background-color 0.3s, color 0.3s;
-    max-width: 1200px; /* Establece un ancho máximo para mantener la legibilidad */
-    margin: 0 auto; /* Centra el contenido */
-  }
-
-  [data-theme="dark"] {
-    background-color: var(--background-dark);
-    color: var(--text-dark);
-  }
-  [data-theme="dark"] h1, [data-theme="dark"] h2, [data-theme="dark"] h3, [data-theme="dark"] p {
-    color: var(--text-light);
-  }
-  .comment-input {
-    width: 100%; /* Ocupa todo el ancho disponible */
-    max-width: 100%; /* Evita que se salga del margen maestro */
-    padding: 10px; /* Añade relleno para una mejor experiencia de usuario */
-    box-sizing: border-box; /* Incluye el relleno en el ancho total */
-  }
 /* Estilo general para la página de inicio */
 .homepage-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
+  max-width: 800px; /* Aumenta el ancho principal */
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between; /* Coloca el contenido principal entre las barras laterales */
+  gap: 1px; /* Agrega una delgada línea de separación entre barras laterales y contenido */
+}
+
+
+/* Estilo para las publicaciones */
+.post {
+  background-color: #fff;
+  border: 1px solid #dbdbdb;
+  border-radius: 4px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+  width: 100%; /* Asegura que las publicaciones ocupen todo el ancho disponible */
+}
+
+@media (max-width: 768px) {
+  .homepage-container {
+    max-width: 95%; /* Ajusta el ancho para pantallas más pequeñas */
+    flex-direction: column; /* Apila barras laterales y contenido en pantallas pequeñas */
   }
   
-  /* Estilo para las publicaciones */
   .post {
-    background-color: #fff;
-    border: 1px solid #dbdbdb;
-    border-radius: 4px;
-    margin-bottom: 20px;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+    width: 100%; /* Asegura que las publicaciones ocupen todo el ancho en pantallas pequeñas */
   }
-  
-  .post img {
-    width: 100%;
-    max-height: 600px;
-    object-fit: cover;
+}
+
+/* Estilos para pantallas aún más pequeñas (ejemplo: smartphones) */
+@media (max-width: 480px) {
+  .homepage-container {
+    max-width: 100%; /* Ocupa el ancho completo en pantallas muy pequeñas */
   }
-  
-  .post-description {
-    padding: 10px;
-    font-size: 14px;
-  }
-  
-  /* Estilo para el nombre de usuario */
-  .post-username {
-    font-weight: 600;
-    margin-right: 8px;
-  }
-  
-  /* Estilo para los iconos de acciones (por ejemplo, Me gusta, Comentario, Enviar) */
-  .post-icons {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-  }
-  
-  .post-icons svg {
-    margin-right: 8px;
-    font-size: 24px;
-  }
-  
-  /* Estilo para los comentarios */
-  .post-comments {
-    padding: 10px;
-    font-size: 14px;
-    line-height: 1.5;
-  }
-  
-  /* Estilo para los botones de "Me gusta" y "Comentar" */
-  .like-comment-buttons {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-  }
-  
-  .like-comment-buttons button {
-    background: none;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .like-comment-buttons button svg {
-    font-size: 24px;
-    margin-right: 8px;
-  }
-  
-  /* Estilo para el campo de comentario */
-  .comment-input {
-    border: none;
-    border-top: 1px solid #dbdbdb;
-    padding: 8px;
-    width: 100%;
-    font-size: 14px;
-    outline: none;
-  }
-  
-  /* Estilo para el botón de publicar comentario */
-  .post-comment-button {
-    background: none;
-    border: none;
-    font-weight: 600;
-    cursor: pointer;
-    color: #0095f6;
-  }
-  
+}
