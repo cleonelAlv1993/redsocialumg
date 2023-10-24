@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Nav from './Componentes/Nav';
+import Signup from './Vistas/Signup';
 import Post from './Post';
 import SideNav from './SideNav';
 import './estilosinicio.css';
@@ -47,6 +49,8 @@ function App() {
         {isDarkMode ? <FontAwesomeIcon icon={faSun} /> : <FontAwesomeIcon icon={faMoon} />}
       </button>
       <div className="container">
+        <Nav />
+        <Signup /> 
         <SideNav />
         <div className="content">
           <div className="homepage-container">
