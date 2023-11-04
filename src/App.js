@@ -1,15 +1,19 @@
 import React, {useState, useEffect} from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Axios from 'axios';
 import { deleteToken, getToken, setToken, initAxiosInterceptors } from './Helpers/auth-helpers.js';
 import Nav from './Componentes/Nav.js';
 import Signup from './Vistas/Signup.js';
 import Login from './Vistas/Login.js';
+import Loading from './Componentes/Loading.js';
+import Main from './Componentes/Main.js';
 
 initAxiosInterceptors();
 
 function App() {
   const [usuario, setUsuario] = useState(null);
   const[cargandoUsuario, setCargandoUsuario] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     async function cargarUsuario() {
@@ -41,7 +45,7 @@ function App() {
 
 
   async function signup(usuario){
-    const {data} = await Axios.post('/api/usuarios/signup', usuario);
+    const { data } = await Axios.post('/api/usuarios/signup', usuario);
     setUsuario(data.usuario);
     setToken(data.token);
   }
@@ -51,12 +55,51 @@ function App() {
     deleteToken();
   }
 
+  function mostrarError(mensaje){
+    setError(mensaje);
+  }
+
+  if(cargandoUsuario) {
+    return(
+      <Main center>
+        <Loading />
+      </Main>
+    )
+  }
+
   return (
-    <div className="ContenedorTemporal">
+    <Router>
       <Nav/>
-      <Signup signup={ signup } />
-      <Login login={ login } />
-    </div>
+      { usuario ? (
+        <LoginRoutes />
+      ) : (
+        <LogoutRoutes  login={login} signup={signup} />
+      )}
+    </Router>
+  );
+}
+
+function LoginRoutes(){
+  return (
+    <Switch>
+      <Route path="/" component={() => <Main center><h1>Feed</h1></Main>} default />
+    </Switch>
+  );
+}
+
+function LogoutRoutes( {login, signup} ){
+  return (
+    <Switch>
+      <Route 
+      path="/login/" 
+      render={(props) => <Login {...props} login={login} ></Login> } >
+      </Route>
+      <Route 
+        render={(props) => <Signup {...props} signup={signup} ></Signup> } 
+        default
+        >
+      </Route>
+    </Switch>
   );
 }
 

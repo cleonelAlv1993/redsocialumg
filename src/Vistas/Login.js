@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import Axios from 'axios';
+import { Link } from 'react-router-dom';
 import Main from '../Componentes/Main';
 
 export default function Login({ login } ){
     const [emailYPassword, setEmailYPassword] = useState({
         email:'',
-        password: '',
+        password: ''
     })
 
     function handleInputChange(e){
@@ -52,7 +52,7 @@ export default function Login({ login } ){
                                 Login
                             </button>
                             <p className="FormContainer_info">
-                                No tienes cuenta? <a href="/signup">Signup</a>
+                                No tienes cuenta? <Link to="/signup">Signup</Link>
                             </p>                            
                     </form>
                 </div>

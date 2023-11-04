@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Axios from 'axios';
+import { Link } from 'react-router-dom';
 import Main from '../Componentes/Main';
 import imagenSignup from '../imagenes/celulares.png';
 import './Signup.css';
@@ -95,7 +95,7 @@ export default function Signup({ signup }){
                             Enviar
                         </button>
                         <p className="FormContainer_info">
-                            Ya tienes cuenta? <a href="/login">Login</a>
+                            Ya tienes cuenta? <Link to="/login">Login</Link>
                         </p>    
                     </form>
                 </div>
