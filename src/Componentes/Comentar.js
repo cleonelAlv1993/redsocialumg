@@ -2,19 +2,24 @@ import React, { useState } from "react";
 
 export default function Comentar({ onSubmitComentario, mostrarError }) {
     const [mensaje, setMensaje] = useState("");
+    const [enviandoComentario, setEnviandoComentario] = useState(false);
 
     async function onSubmit(e){
         e.preventDefault();
-        if(mensaje.length === 0){
-            mostrarError("Debes escribir un comentario");
+        if (enviandoComentario) {
             return;
         }
         try {
+            setEnviandoComentario(true);
             await onSubmitComentario(mensaje);
-            setMensaje("");
+            setMensaje('');
+            setEnviandoComentario(false);
         } catch (error) {
-            mostrarError(error.message);
+            setEnviandoComentario(false);
+            mostrarError('Error al enviar comentario');
+            console.log(error);
         }
+
     }
     return(
         <form className="Post__comentario-form-container" onSubmit={onSubmit}>

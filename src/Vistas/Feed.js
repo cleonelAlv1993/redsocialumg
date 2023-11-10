@@ -12,9 +12,13 @@ async function cargarPosts(fechaDelUltimoPost){
     return nuevosPosts;
 }
 
-export default function Fedd({mostrarError}){
+const NUMERO_DE_POSTS_POR_LLAMADA = 3;
+
+export default function Fedd({mostrarError, usuario}){
     const [posts, setPosts] = useState([]);
     const [cargandoPostIniciales, setcargandoPostIniciales] = useState(true);
+    const [cargandoMasPost, setcargandoMasPost] = useState(false);
+    const [todosLosPostCargados, setTodosLosPostCargados] = useState(false);
 
     useEffect(() => {
             async function cargarPostsIniciales(){
@@ -23,6 +27,7 @@ export default function Fedd({mostrarError}){
                     setPosts(nuevosPosts);
                     console.log(nuevosPosts);
                     setcargandoPostIniciales(false);
+                    revisarSiHayMasPosts(nuevosPosts);
                 } catch (error) {
                     mostrarError('Error al cargar publicaciones');
                     console.log(error);
@@ -33,6 +38,43 @@ export default function Fedd({mostrarError}){
     },
         []
     );
+
+    function actualizarPost(postOriginal, postActualizado){
+        setPosts(posts => {
+            const postsActualizados = posts.map(post => {
+                if (post !== postOriginal) {
+                    return post;
+                } 
+                return postActualizado;
+            } );
+            return postsActualizados;
+        } );
+
+    }
+
+    async function cargarMasPosts(){
+        if (cargandoMasPost) {
+            return;
+        }
+        try {
+            setcargandoMasPost(true);
+            const fechaDelUltimoPost = posts[posts.length - 1].fecha_creado;
+            const nuevosPosts = await cargarPosts(fechaDelUltimoPost);
+            setPosts(viejosPosts => [...viejosPosts,...nuevosPosts]);
+            setcargandoMasPost(false);
+            revisarSiHayMasPosts(nuevosPosts);
+        } catch (error) {
+            setcargandoMasPost(false);
+            mostrarError('Error al cargar publicaciones');
+            console.log(error);
+        }
+    }
+
+    function revisarSiHayMasPosts(nuevosPosts){
+        if (nuevosPosts.length < NUMERO_DE_POSTS_POR_LLAMADA) {
+            setTodosLosPostCargados(true);
+        }
+    }
 
     if (cargandoPostIniciales) {
         return(        
@@ -56,9 +98,13 @@ export default function Fedd({mostrarError}){
                         <Post 
                             key={post._id} 
                             post={post} 
+                            actualizarPost={actualizarPost}
+                            mostrarError={mostrarError}
+                            usuario={usuario}
                         />
                     ))
                 }
+                <CargarMasPosts onClick={cargarMasPosts} todosLosPostCargados={todosLosPostCargados} />
             </div>
         </Main>
     );
@@ -76,5 +122,16 @@ function NosiguesANadie(){
                 </Link>
             </div> 
         </div>
+    );
+}
+
+function CargarMasPosts({ onClick, todosLosPostCargados}){
+    if (todosLosPostCargados) {
+        return <div className = "Feed__no-hay-mas-posts"> No hay mas publicaciones</div>
+    }
+    return (
+        <button className="Feed__cargar-mas" onClick={onClick}>
+            Cargar más publicaciones
+        </button>
     );
 }

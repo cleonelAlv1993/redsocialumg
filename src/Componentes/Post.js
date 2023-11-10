@@ -3,8 +3,9 @@ import { Link } from "react-router-dom";
 import Avatar from "./Avatar.js";
 import BotonLike from "./BotonLike.js";
 import Comentar from "./Comentar.js";
+import { toggleLike, comentar } from "../Helpers/post-helpers.js";
 
-export default function Post({post, actualizarPost}){
+export default function Post({post, actualizarPost, mostrarError, usuario}){
     const {
         numLikes,
         numComentarios,
@@ -12,13 +13,37 @@ export default function Post({post, actualizarPost}){
         _id,
         caption,
         url,
-        usuario,
+        usuario: usuarioDelPost,
         estaLike
     } = post;
 
+    const [enviandoLike, setEnviandoLike] = useState(false);
+
+    async function onSubmitLike(){
+        if (enviandoLike) {
+            return;
+        }
+
+        try {
+            setEnviandoLike(true);
+            const postActualizado = await toggleLike(post);
+            actualizarPost(post, postActualizado);
+            setEnviandoLike(false);
+        } catch (error) {
+            setEnviandoLike(false);
+            mostrarError('Error al enviar like');
+            console.log(error);
+        }
+    }
+
+    async function onSubmitComentario(mensaje){
+       const postActualizado = await comentar(post, mensaje, usuario);
+       actualizarPost(post, postActualizado);
+    }
+
     return (
         <div className="Post-Componente">
-            <Avatar usuario={usuario} />
+            <Avatar usuario={usuarioDelPost} />
             <img src={url} alt={caption} className="Post-Componente__img" />
             <div className="Post-Componente__acciones">
                 <div className="Post-Componente__like-container">
@@ -27,8 +52,8 @@ export default function Post({post, actualizarPost}){
                 <p>Liked por {numLikes} personas</p>
                 <ul>
                     <li>
-                        <Link to={`/perfil/${usuario.username}`}>
-                            <b>{usuario.username}</b>
+                        <Link to={`/perfil/${usuarioDelPost.username}`}>
+                            <b>{usuarioDelPost.username}</b>
                         </Link>{' '}
                         {caption}
                     </li>
@@ -36,7 +61,7 @@ export default function Post({post, actualizarPost}){
                     <Comentarios comentarios={comentarios} />
                 </ul>
             </div>
-            <Comentar />
+            <Comentar onSubmitComentario={onSubmitComentario}/>
         </div>
     );
 }

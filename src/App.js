@@ -81,7 +81,7 @@ function App() {
       <Nav usuario={usuario} />
       <Error mensaje={error} esconderError={esconderError}/>
       { usuario ? (
-        <LoginRoutes mostrarError={mostrarError} />
+        <LoginRoutes mostrarError={mostrarError} usuario={usuario} />
       ) : (
         <LogoutRoutes  login={login} signup={signup} mostrarError={mostrarError} />
       )}
@@ -89,7 +89,7 @@ function App() {
   );
 }
 
-function LoginRoutes({mostrarError} ){
+function LoginRoutes({mostrarError, usuario} ){
   return (
     <Switch>
       <Route
@@ -97,7 +97,7 @@ function LoginRoutes({mostrarError} ){
       render={(props) => <Upload {...props} mostrarError={mostrarError} ></Upload> }
       />
       <Route path="/" 
-      render={(props) => <Feed {...props} mostrarError={mostrarError} ></Feed> } 
+      render={(props) => <Feed {...props} mostrarError={mostrarError} usuario={usuario} ></Feed> } 
       default 
       />
     </Switch>
