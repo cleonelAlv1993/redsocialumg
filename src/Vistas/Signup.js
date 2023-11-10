@@ -4,7 +4,7 @@ import Main from '../Componentes/Main';
 import imagenSignup from '../imagenes/celulares.png';
 import './Signup.css';
 
-export default function Signup({ signup }){
+export default function Signup({ signup, mostrarError }){
     const [usuario, setUsuario] = useState({
         email:'',
         username: '',
@@ -24,9 +24,9 @@ export default function Signup({ signup }){
         e.preventDefault();
 
         try {
-            signup(usuario);
+           await signup(usuario);
         } catch (error) {
-            
+            mostrarError(error.response.data);
         }
     }
 

@@ -2,9 +2,13 @@ import React, {useState, useEffect} from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Axios from 'axios';
 import { deleteToken, getToken, setToken, initAxiosInterceptors } from './Helpers/auth-helpers.js';
-import Nav from './Componentes/Nav.js';
+
 import Signup from './Vistas/Signup.js';
 import Login from './Vistas/Login.js';
+import Upload from './Vistas/Upload.js';
+
+import Nav from './Componentes/Nav.js';
+import Error from './Componentes/Error.js';
 import Loading from './Componentes/Loading.js';
 import Main from './Componentes/Main.js';
 
@@ -59,6 +63,10 @@ function App() {
     setError(mensaje);
   }
 
+  function esconderError(){
+    setError(null);
+  }
+
   if(cargandoUsuario) {
     return(
       <Main center>
@@ -69,33 +77,38 @@ function App() {
 
   return (
     <Router>
-      <Nav/>
+      <Nav usuario={usuario} />
+      <Error mensaje={error} esconderError={esconderError}/>
       { usuario ? (
-        <LoginRoutes />
+        <LoginRoutes mostrarError={mostrarError} />
       ) : (
-        <LogoutRoutes  login={login} signup={signup} />
+        <LogoutRoutes  login={login} signup={signup} mostrarError={mostrarError} />
       )}
     </Router>
   );
 }
 
-function LoginRoutes(){
+function LoginRoutes({mostrarError} ){
   return (
     <Switch>
+      <Route 
+      path="/upload/" 
+      render={(props) => <Upload {...props} mostrarError={mostrarError} ></Upload> } >
+      </Route>
       <Route path="/" component={() => <Main center><h1>Feed</h1></Main>} default />
     </Switch>
   );
 }
 
-function LogoutRoutes( {login, signup} ){
+function LogoutRoutes( {login, signup, mostrarError} ){
   return (
     <Switch>
       <Route 
       path="/login/" 
-      render={(props) => <Login {...props} login={login} ></Login> } >
+      render={(props) => <Login {...props} login={login} mostrarError={mostrarError} ></Login> } >
       </Route>
       <Route 
-        render={(props) => <Signup {...props} signup={signup} ></Signup> } 
+        render={(props) => <Signup {...props} signup={signup} mostrarError={mostrarError} ></Signup> } 
         default
         >
       </Route>

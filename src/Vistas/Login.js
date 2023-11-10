@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Main from '../Componentes/Main';
 
-export default function Login({ login } ){
+export default function Login({ login, mostrarError } ){
     const [emailYPassword, setEmailYPassword] = useState({
         email:'',
         password: ''
@@ -19,9 +19,9 @@ export default function Login({ login } ){
         e.preventDefault();
 
         try {
-            login(emailYPassword.email, emailYPassword.password);
+           await login(emailYPassword.email, emailYPassword.password);
         } catch (error) {
-            
+            mostrarError(error.response.data);
         }
     }
     return (
