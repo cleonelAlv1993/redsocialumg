@@ -6,6 +6,7 @@ import { deleteToken, getToken, setToken, initAxiosInterceptors } from './Helper
 import Signup from './Vistas/Signup.js';
 import Login from './Vistas/Login.js';
 import Upload from './Vistas/Upload.js';
+import Feed from './Vistas/Feed.js';
 
 import Nav from './Componentes/Nav.js';
 import Error from './Componentes/Error.js';
@@ -91,11 +92,14 @@ function App() {
 function LoginRoutes({mostrarError} ){
   return (
     <Switch>
-      <Route 
+      <Route
       path="/upload/" 
-      render={(props) => <Upload {...props} mostrarError={mostrarError} ></Upload> } >
-      </Route>
-      <Route path="/" component={() => <Main center><h1>Feed</h1></Main>} default />
+      render={(props) => <Upload {...props} mostrarError={mostrarError} ></Upload> }
+      />
+      <Route path="/" 
+      render={(props) => <Feed {...props} mostrarError={mostrarError} ></Feed> } 
+      default 
+      />
     </Switch>
   );
 }
