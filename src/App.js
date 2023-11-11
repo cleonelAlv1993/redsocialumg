@@ -23,6 +23,7 @@ function App() {
   const[cargandoUsuario, setCargandoUsuario] = useState(true);
   const [error, setError] = useState(null);
 
+
   useEffect(() => {
     async function cargarUsuario() {
       if(!getToken()) {
@@ -61,6 +62,7 @@ function App() {
   function logout(){
     setUsuario(null);
     deleteToken();
+    window.location.href = '/';
   }
 
   function mostrarError(mensaje){

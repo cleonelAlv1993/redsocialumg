@@ -1,10 +1,24 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Main from '../Componentes/Main';
 import imagenSignup from '../imagenes/celulares.png';
 import './Signup.css';
+import ReCAPTCHA from "react-google-recaptcha";
 
 export default function Signup({ signup, mostrarError }) {
+  
+  const captcha = useRef(null);
+  const [recaptchaAceptado, setRecaptchaAceptado] = useState(false);
+
+  const onChange = () => {
+    if (captcha.current.getValue()) {
+      setRecaptchaAceptado(true);
+      console.log("Usuario no es robot");
+    } else {
+      setRecaptchaAceptado(false);
+    }
+    
+  }
   const [usuario, setUsuario] = useState({
     email: '',
     username: '',
@@ -88,9 +102,18 @@ export default function Signup({ signup, mostrarError }) {
               onChange={handleInputChange}
               value={usuario.password}
             />
+            <div className="recaptcha">
+              <ReCAPTCHA
+                ref={captcha}
+                sitekey="6LcgtgspAAAAAJuXymyo3TQVeI1yCKLdHppYL5Qg"
+                onChange={onChange}
+              />
+            </div>
+            {recaptchaAceptado && (
             <button className="Form_submit" type="submit">
               Registrarse
             </button>
+            )}
             <p className="FormContainer_info">
               ¿Ya tienes cuenta? <Link to="/login">Inicia sesión</Link>
             </p>

@@ -212,7 +212,7 @@ function BotonSeguir( {siguiendo, toggleSiguiendo} ){
 function BotonLogout( {logout} ){
     return(
         <button 
-        className="Perfil__boton-logout" 
+        className="Perfil__boton-logout"
         onClick={logout}>
             <FontAwesomeIcon icon={faRightFromBracket}></FontAwesomeIcon>
         </button>

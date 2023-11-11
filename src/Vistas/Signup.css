@@ -1,44 +1,59 @@
-.Signup {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
-  
-  .Signup_img {
-    width: 300px; /* Ajusta el tamaño de la imagen según sea necesario */
-  }
-  
-  .Form_titulo {
-    font-size: 2rem;
-    margin-bottom: 10px;
-  }
-  
-  .FormContainer_info {
-    font-size: 0.9rem;
-    margin-bottom: 20px;
-  }
-  
-  .Form_field {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    font-size: 1rem;
-  }
-  
-  .Form_submit {
-    width: 100%;
-    padding: 10px;
-    background-color: #0095f6; /* Color azul de Instagram */
-    color: #fff;
-    font-size: 1rem;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .Form_submit:hover {
-    background-color: #0077c2; /* Cambia el color al pasar el mouse */
-  }
-  
+/* Agrega un contenedor para el formulario y el reCAPTCHA */
+.FormContainer {
+  max-width: 400px; /* O ajusta según sea necesario */
+  width: 100%;
+}
 
-  
+/* Ajusta el estilo del reCAPTCHA */
+.recaptcha {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px; /* Espaciado inferior */
+}
+
+/* Estilo para el contenedor principal de Signup */
+.Signup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column; /* Cambia la dirección a columna */
+}
+
+.Signup_img {
+  width: 150px; /* Ajusta el tamaño de la imagen según sea necesario */
+  margin-bottom: 20px; /* Espaciado inferior para la imagen */
+}
+
+/* Otros estilos permanecen igual */
+.Form_titulo {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.FormContainer_info {
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+.Form_field {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+.Form_submit {
+  width: 100%;
+  padding: 10px;
+  background-color: #0095f6;
+  color: #fff;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+}
+
+.Form_submit:hover {
+  background-color: #0077c2;
+}
