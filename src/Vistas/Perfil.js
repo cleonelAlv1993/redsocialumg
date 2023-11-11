@@ -6,6 +6,8 @@ import Grid from "../Componentes/Grid";
 import RecursoNoExiste from "../Componentes/RecursoNoExiste";
 import Axios from 'axios';
 import stringToColor from 'string-to-color';
+import toggleSiguiendo from "../Helpers/amistad-herlpers";
+import useEsMobil from "../Hooks/useEsMobil";
 
 export default function Perfil({mostrarError, usuario, match, logout}){
     const username = match.params.username;
@@ -14,6 +16,8 @@ export default function Perfil({mostrarError, usuario, match, logout}){
     const [posts, setPosts] = useState([]);
     const [perfilNoExiste, setperfilNoExiste] = useState(false);
     const [subiendoImagen, setSubiendoImagen] = useState(false);
+    const [enviandoAmistad, setEnviandoAmistad] = useState(false);
+    const esMobil = useEsMobil();
 
     useEffect(() => {
         async function cargarPostsYUsuario(){
@@ -63,6 +67,24 @@ export default function Perfil({mostrarError, usuario, match, logout}){
         }
     }
 
+    async function onToggleSiguiendo(){
+        if (enviandoAmistad) {
+            return;
+        }
+
+        try {
+            setEnviandoAmistad(true);
+            const usuarioActualizado = await toggleSiguiendo(usuarioDueñoDelPerfil);
+            setUsuarioDueñoDelPerfil(usuarioActualizado);
+            setEnviandoAmistad(false);
+
+        } catch (error) {
+            mostrarError("Error al seguir al usuario");
+            setEnviandoAmistad(false);
+            console.log(error);
+        }
+    }
+
     if (cargandoPerfil) {
         return(
             <Main center>
@@ -95,14 +117,37 @@ export default function Perfil({mostrarError, usuario, match, logout}){
                     {!esElPerfilDeLaPersonaLogin() && (
                     <BotonSeguir 
                         siguiendo={usuarioDueñoDelPerfil.siguiendo} 
-                        toggleSiguiendo={()=> 1}
+                        toggleSiguiendo={onToggleSiguiendo}
                     />
                     )}
                     { esElPerfilDeLaPersonaLogin() && <BotonLogout logout={logout}></BotonLogout>}
-                </div>     
+                </div>  
+                {!esMobil && (
+                    <DescripcionPerfil usuarioDueñoDelPerfil={usuarioDueñoDelPerfil}></DescripcionPerfil>
+                )}   
             </div>
             </div>
+            {esMobil && (
+                    <DescripcionPerfil usuarioDueñoDelPerfil={usuarioDueñoDelPerfil}></DescripcionPerfil>
+            )}
+            <div className="Perfil__separador" />
+            {posts.length > 0 ? <Grid posts={posts}></Grid>: <NoHaPosteadoFotos/> }   
         </Main>
+    );
+}
+
+function DescripcionPerfil({usuarioDueñoDelPerfil}){
+    return(
+        <div className="Perfil__descripcion">
+            <h2 className="Perfil__nombre">{usuarioDueñoDelPerfil.nombre}</h2>
+            <p>{usuarioDueñoDelPerfil.bio}</p>
+            <p className="Perfil__estadisticas">
+                <b>{usuarioDueñoDelPerfil.numSiguiendo}</b> siguiendo
+                <span className="ml-4">
+                <b>{usuarioDueñoDelPerfil.numSeguidores}</b> seguidores
+                </span>
+            </p>
+        </div>
     );
 }
 
@@ -169,4 +214,8 @@ function BotonLogout( {logout} ){
             Logout
         </button>
     )
+}
+
+function NoHaPosteadoFotos(){
+    return <p className="text-center"> No se han publicado fotos.</p>
 }

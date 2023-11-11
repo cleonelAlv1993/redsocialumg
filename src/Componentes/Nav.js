@@ -5,6 +5,7 @@ import { faCameraRetro} from '@fortawesome/free-solid-svg-icons';
 import { faCompass } from '@fortawesome/free-regular-svg-icons';
 import { faUser } from '@fortawesome/free-regular-svg-icons';
 
+
 export default function Nav({usuario}){
     return(
         <nav className="Nav">
