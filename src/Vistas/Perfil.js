@@ -10,6 +10,7 @@ import toggleSiguiendo from "../Helpers/amistad-herlpers";
 import useEsMobil from "../Hooks/useEsMobil";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRightFromBracket} from '@fortawesome/free-solid-svg-icons';
+import './Perfil.css';
 
 export default function Perfil({mostrarError, usuario, match, logout}){
     const username = match.params.username;

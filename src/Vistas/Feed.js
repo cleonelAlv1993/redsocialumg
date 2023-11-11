@@ -4,6 +4,7 @@ import Axios from 'axios';
 import Main from '../Componentes/Main.js';
 import Loading from '../Componentes/Loading.js';
 import Post from '../Componentes/Post.js';
+import './Feed.css';  
 
 async function cargarPosts(fechaDelUltimoPost){
     const query = fechaDelUltimoPost ? `?fecha=${fechaDelUltimoPost}` : '';

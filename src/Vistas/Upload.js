@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload} from '@fortawesome/free-solid-svg-icons';
 import Loading from '../Componentes/Loading.js';
 import Axios from 'axios';
+import './Upload.css';
 
 export default function Upload({history, mostrarError}) {
     const [imagenUrl, setImagenUrl] = useState('');

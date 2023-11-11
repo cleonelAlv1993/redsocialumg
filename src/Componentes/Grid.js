@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import ImagenZoom from "../Vistas/ImagenZoom";
 
 export default function Grid( { posts } ){
     const columnas = posts.reduce((columnas, post) => {
@@ -34,7 +35,7 @@ export default function Grid( { posts } ){
 function GridFoto({ _id, url, caption}){
     return (
         <Link to={`/posts/${_id}`} className="Grid__post">
-            <img src={url} alt={caption} className="Grid__post-img" />
+            <ImagenZoom src={url} alt={caption} />
         </Link>
     );
 }

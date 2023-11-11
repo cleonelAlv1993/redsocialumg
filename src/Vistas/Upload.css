@@ -1,0 +1,52 @@
+.Upload {
+    max-width: 600px;
+    width: 100%;
+  }
+  
+  .Upload__image-section {
+    margin-bottom: 20px;
+  }
+  
+  .Upload__caption {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 1rem;
+  }
+  
+  .Upload__submit {
+    width: 100%;
+    padding: 10px;
+    background-color: #0095f6;
+    color: #fff;
+    font-size: 1rem;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .Upload__submit:hover {
+    background-color: #0077c2;
+  }
+  
+  .Upload__image-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    padding: 20px;
+    border: 2px dashed #ddd;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+  
+  .Upload__image-label:hover {
+    background-color: #f7f7f7;
+  }
+  
+  .Upload__image-label span {
+    margin-top: 10px;
+    font-size: 1rem;
+  }
+  
+  

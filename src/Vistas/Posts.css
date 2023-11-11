@@ -1,0 +1,50 @@
+.Post {
+    max-width: 600px;
+    width: 100%;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border: 1px solid #dbdbdb;
+    border-radius: 8px;
+    margin-bottom: 32px;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+  }
+  
+  .Post__image-container {
+    width: 100%;
+    overflow: hidden;
+    border-bottom: 1px solid #dbdbdb;
+  }
+  
+  .Post__image-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .Post__side-bar {
+    padding: 16px;
+  }
+  
+  .Post__comentarios-y-like {
+    margin-top: 16px;
+  }
+  
+  .Post__like {
+    margin-bottom: 16px;
+  }
+  
+  .Post__comentarios {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .Post__comentario {
+    margin-bottom: 8px;
+  }
+  
+  .Post__autor-comentario {
+    font-weight: bold;
+    text-decoration: none;
+    color: #262626;
+  }
+  

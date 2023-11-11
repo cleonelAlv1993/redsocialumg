@@ -5,6 +5,7 @@ import { ImagenAvatar } from "../Componentes/Avatar";
 import Main from "../Componentes/Main";
 import Grid from "../Componentes/Grid";
 import Axios from 'axios';
+import './Explore.css';
 
 export default function Explore( { mostrarError } ){
     const [posts, setPosts] = useState([]);

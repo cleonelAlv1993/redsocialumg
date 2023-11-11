@@ -1,54 +1,44 @@
-/* Signup.css */
-
 .Signup {
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     height: 100vh;
-}
-
-.Signup_img {
-    width: 400px; /* Ajusta el tamaño de la imagen según tus necesidades */
-    height: auto;
-}
-
-.FormContainer {
-    max-width: 400px;
-    text-align: center;
-}
-
-.Form_titulo {
-    font-family: 'Billabong', cursive; /* Si tienes una fuente personalizada, úsala aquí */
-    font-size: 2.5rem;
-}
-
-.FormContainer_info {
+  }
+  
+  .Signup_img {
+    width: 300px; /* Ajusta el tamaño de la imagen según sea necesario */
+  }
+  
+  .Form_titulo {
+    font-size: 2rem;
+    margin-bottom: 10px;
+  }
+  
+  .FormContainer_info {
     font-size: 0.9rem;
-    margin-top: 10px;
-}
-
-.Form_field {
+    margin-bottom: 20px;
+  }
+  
+  .Form_field {
     width: 100%;
     padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #dbdbdb;
-    border-radius: 3px;
-    font-size: 0.9rem;
-}
-
-.Form_submit {
+    margin-bottom: 10px;
+    font-size: 1rem;
+  }
+  
+  .Form_submit {
     width: 100%;
     padding: 10px;
-    background-color: #0095f6; /* Color de fondo similar a Instagram */
+    background-color: #0095f6; /* Color azul de Instagram */
     color: #fff;
     font-size: 1rem;
     border: none;
-    border-radius: 3px;
     cursor: pointer;
-}
+  }
+  
+  .Form_submit:hover {
+    background-color: #0077c2; /* Cambia el color al pasar el mouse */
+  }
+  
 
-.Form_submit:hover {
-    background-color: #0085e6; /* Cambia el color al hacer hover */
-}
-
-/* Puedes seguir personalizando los estilos según tus preferencias */
+  

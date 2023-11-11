@@ -4,6 +4,7 @@ import Avatar from "./Avatar.js";
 import BotonLike from "./BotonLike.js";
 import Comentar from "./Comentar.js";
 import { toggleLike, comentar } from "../Helpers/post-helpers.js";
+import ImagenZoom from "../Vistas/ImagenZoom";
 
 export default function Post({post, actualizarPost, mostrarError, usuario}){
     const {
@@ -44,12 +45,14 @@ export default function Post({post, actualizarPost, mostrarError, usuario}){
     return (
         <div className="Post-Componente">
             <Avatar usuario={usuarioDelPost} />
-            <img src={url} alt={caption} className="Post-Componente__img" />
+            <Link to={`/posts/${_id}`}>
+            <ImagenZoom src={url} alt={caption} />
+            </Link>
             <div className="Post-Componente__acciones">
                 <div className="Post-Componente__like-container">
                     <BotonLike onSubmitLike={() => 1} like={estaLike}/>
                 </div>
-                <p>Liked por {numLikes} personas</p>
+                <p>A {numLikes} personas les ha gustado</p>
                 <ul>
                     <li>
                         <Link to={`/perfil/${usuarioDelPost.username}`}>

@@ -8,6 +8,8 @@ import RecursoNoExiste from '../Componentes/RecursoNoExiste';
 import { Link } from 'react-router-dom';
 import Axios from 'axios';
 import { toggleLike, comentar } from "../Helpers/post-helpers.js";
+import './Posts.css';
+import ImagenZoom from "../Vistas/ImagenZoom";
 
 export default function PostVista({mostrarError, match, usuario}){
     const postId = match.params.id;
@@ -86,6 +88,7 @@ export default function PostVista({mostrarError, match, usuario}){
 }
 
 function Post({
+    numLikes,
     comentarios,
     caption,
     url,
@@ -97,7 +100,7 @@ function Post({
     return (
         <div className="Post">
             <div className="Post__image-container">
-                <img src={url} alt={caption} />
+            <ImagenZoom src={url} alt={caption} />
             </div>
                 <div className="Post__side-bar">
                     <Avatar usuario={usuario}></Avatar>
@@ -106,6 +109,7 @@ function Post({
                         <div className="Post__like">
                             <BotonLike onSubmitLike={onSubmitLike} like={estaLike} />
                         </div>
+                        <p>A {numLikes} personas les ha gustado</p>
                         <Comentar onSubmitComentario={onSubmitComentario} />
                     </div>
                 </div>

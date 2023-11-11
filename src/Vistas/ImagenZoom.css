@@ -1,0 +1,17 @@
+.imagen-zoom-container {
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .imagen-zoom-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  
+  .imagen-zoom-container.zoomed {
+    transform: scale(2.4); 
+    z-index: 1;
+  }
+  
