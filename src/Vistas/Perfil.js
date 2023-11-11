@@ -8,6 +8,8 @@ import Axios from 'axios';
 import stringToColor from 'string-to-color';
 import toggleSiguiendo from "../Helpers/amistad-herlpers";
 import useEsMobil from "../Hooks/useEsMobil";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faRightFromBracket} from '@fortawesome/free-solid-svg-icons';
 
 export default function Perfil({mostrarError, usuario, match, logout}){
     const username = match.params.username;
@@ -211,7 +213,7 @@ function BotonLogout( {logout} ){
         <button 
         className="Perfil__boton-logout" 
         onClick={logout}>
-            Logout
+            <FontAwesomeIcon icon={faRightFromBracket}></FontAwesomeIcon>
         </button>
     )
 }
