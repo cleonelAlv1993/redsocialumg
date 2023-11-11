@@ -5,6 +5,7 @@ import imagenSignup from '../imagenes/celulares.png';
 import './Signup.css';
 import ReCAPTCHA from "react-google-recaptcha";
 
+
 export default function Signup({ signup, mostrarError }) {
   
   const captcha = useRef(null);
