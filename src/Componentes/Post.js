@@ -73,7 +73,7 @@ function VerTodosLosComentarios( {_id, numComentarios} ){
 
     return (
         <li className="text-grey-dark">
-            <Link to={`/post/${_id}`}>
+            <Link to={`/posts/${_id}`}>
                 Ver los {numComentarios} comentarios
             </Link>
         </li>

@@ -7,6 +7,9 @@ import Signup from './Vistas/Signup.js';
 import Login from './Vistas/Login.js';
 import Upload from './Vistas/Upload.js';
 import Feed from './Vistas/Feed.js';
+import Posts from './Vistas/Posts.js';
+import Explore from './Vistas/Explore.js';
+import Perfil from './Vistas/Perfil.js';
 
 import Nav from './Componentes/Nav.js';
 import Error from './Componentes/Error.js';
@@ -81,7 +84,7 @@ function App() {
       <Nav usuario={usuario} />
       <Error mensaje={error} esconderError={esconderError}/>
       { usuario ? (
-        <LoginRoutes mostrarError={mostrarError} usuario={usuario} />
+        <LoginRoutes mostrarError={mostrarError} usuario={usuario} logout={logout} />
       ) : (
         <LogoutRoutes  login={login} signup={signup} mostrarError={mostrarError} />
       )}
@@ -89,12 +92,24 @@ function App() {
   );
 }
 
-function LoginRoutes({mostrarError, usuario} ){
+function LoginRoutes({mostrarError, usuario, logout} ){
   return (
     <Switch>
       <Route
       path="/upload/" 
       render={(props) => <Upload {...props} mostrarError={mostrarError} ></Upload> }
+      />
+      <Route
+      path="/posts/:id" 
+      render={(props) => <Posts {...props} mostrarError={mostrarError} usuario={usuario} ></Posts> }
+      />
+      <Route
+      path="/perfil/:username" 
+      render={(props) => <Perfil {...props} mostrarError={mostrarError} usuario={usuario} logout={logout} ></Perfil> }
+      />
+      <Route
+      path="/explore" 
+      render={(props) => <Explore {...props} mostrarError={mostrarError} ></Explore> }
       />
       <Route path="/" 
       render={(props) => <Feed {...props} mostrarError={mostrarError} usuario={usuario} ></Feed> } 
